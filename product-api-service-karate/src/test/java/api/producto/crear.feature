@@ -12,8 +12,11 @@ Feature: Crear un nuevo producto usando la API /api/v1/product/
         "price": 1500,
       }
       """
+		* header Authorization = 'Bearer aGFzaGRzZnNkZnNkZnNkZnNk'
+    * header Accept = 'application/json'
+    * header Content-Type = 'application/json'
 
-	Scenario: Crear un producto de forma exitosa
+	Scenario: Crear un producto de forma exitosa con json como texto
     * def producto =
       """
       {
@@ -25,13 +28,15 @@ Feature: Crear un nuevo producto usando la API /api/v1/product/
     Given url 'http://localhost:8081/api/v1/product/'
     And request producto
     And header Accept = 'application/json'
+    And header Authorization = 'Bearer aGFzaGRzZnNkZnNkZnNkZnNk'
     When method post
     Then status 201
 
-	Scenario: Crear un producto de forma exitosa
+	Scenario: Crear un producto de forma exitosa usando json 
     Given url 'http://localhost:8081/api/v1/product/'
     And request { name: 'Iphone 12', description: 'Este es un smartphone de alta gama', price: 1200 }
     And header Accept = 'application/json'
+    And header Authorization = 'Bearer aGFzaGRzZnNkZnNkZnNkZnNk'
     When method post
     Then status 201
         
@@ -39,14 +44,14 @@ Feature: Crear un nuevo producto usando la API /api/v1/product/
     Given path "/api/v1/product/","/"
     And request nuevo_producto
     And header Accept = 'application/json'
+    And header Authorization = 'Bearer aGFzaGRzZnNkZnNkZnNkZnNk'
     When method post
     Then status 201
     And match $ == {"sku":'#notnull',"status":true,"message":"El producto fue creado con éxito!"} 
     
-	Scenario: Crear un producto de forma exitosa, path, response
+	Scenario: Crear un producto de forma exitosa, path, response and headers
     Given path ruta_crear,"/"
     And request nuevo_producto
-    And header Accept = 'application/json'
     When method post
     Then status 201
     And match responseType == 'json'
@@ -56,6 +61,7 @@ Feature: Crear un nuevo producto usando la API /api/v1/product/
     Given path ruta_crear,"/"
     And request <producto>
     And header Accept = 'application/json'
+    And header Authorization = 'Bearer aGFzaGRzZnNkZnNkZnNkZnNk'
     When method post
     Then status 201
     And match responseType == 'json'

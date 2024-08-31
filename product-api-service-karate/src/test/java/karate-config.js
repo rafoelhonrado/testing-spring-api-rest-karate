@@ -1,4 +1,4 @@
-function fn() {
+function karateConfig() {
   var env = karate.env; // get system property 'karate.env'
   karate.log('karate.env system property was:', env);
   if (!env) {
@@ -6,7 +6,9 @@ function fn() {
   }
   var config = {
     env: env,
-    myVarName: 'someValue'
+    myVarName: 'someValue',
+	urlBase: 'http://localhost:8081',
+	token: 'Bearer aGFzaGRzZnNkZnNkZnNkZnNk'
   }
   if (env == 'dev') {
     // customize

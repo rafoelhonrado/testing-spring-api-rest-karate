@@ -6,6 +6,8 @@ Feature: Actualizar un producto usando la API /api/v1/product/
     * def ruta_crear = '/api/v1/product/'
 		Given path ruta_crear,"/"
 		And request { name: 'Iphone 99', description: 'Este es un smartphone de alta gama', price: 9999 }
+		And header Accept = 'application/json'
+		And header Authorization = 'Bearer aGFzaGRzZnNkZnNkZnNkZnNk'
 		When method post
 		Then status 201
 		* def sku_creado = response.sku
